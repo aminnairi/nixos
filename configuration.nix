@@ -66,7 +66,6 @@ in
 		vim
 		google-chrome
 		home-manager
-		discord
 	];
 
 	home-manager.users.amin = { pkgs, ... }: {
