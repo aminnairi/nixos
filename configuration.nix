@@ -178,68 +178,80 @@ in
 		home = "/home/amin";
 	}; 
 
-	home-manager.useGlobalPkgs = true;
-	home-manager.useUserPackages = true;
+  home-manager = {
+    backupFileExtension = "backup";
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users = {
+      amin = {
+        home = {
+          stateVersion = "25.11";
+          packages = with pkgs; [
+            ripgrep
+            fd
+          ];
+        };
+        programs = {
+          fish = {
+            enable = true;
+            shellAbbrs = {
+              dkcpdn = "docker compose down --remove-orphans --volumes --timeout 0";
+            };
+          };
+          vim = {
+            enable = true;
+            plugins = with pkgs.vimPlugins; [
+              vim-nix
+              vim-airline
+              nerdtree
+            ];
+            extraConfig = ''
+              syntax on
+              colorscheme catppuccin
 
-	home-manager.users.amin = {
-		home = {
-			stateVersion = "25.11";
-			packages = with pkgs; [
-				ripgrep
-				fd
-			];
-		};
-		programs.vim = {
-			enable = true;
-			plugins = with pkgs.vimPlugins; [
-				vim-nix
-				vim-airline
-				nerdtree
-			];
-			extraConfig = ''
-				syntax on
+              nmap <silent> gd <Plug>(coc-definition)
+              nmap <silent> gy <Plug>(coc-type-definition)
+              nmap <silent> gi <Plug>(coc-implementation)
+              nmap <silent> gr <Plug>(coc-references)
 
-				nmap <silent> gd <Plug>(coc-definition)
-				nmap <silent> gy <Plug>(coc-type-definition)
-				nmap <silent> gi <Plug>(coc-implementation)
-				nmap <silent> gr <Plug>(coc-references)
+              set expandtab        " Utilise des espaces au lieu des tabulations
+              set shiftwidth=2     " Indentation automatique de 2 espaces
+              set softtabstop=2    " 2 espaces pour la touche Tab
+              set tabstop=2        " Une tabulation = 2 espaces
+              set smartindent      " Indentation intelligente selon le langage
 
-				set expandtab        " Utilise des espaces au lieu des tabulations
-				set shiftwidth=2     " Indentation automatique de 2 espaces
-				set softtabstop=2    " 2 espaces pour la touche Tab
-				set tabstop=2        " Une tabulation = 2 espaces
-				set smartindent      " Indentation intelligente selon le langage
+              set number           " Numéros de ligne
+              set relativenumber   " Numéros relatifs (crucial pour sauter des lignes)
+              set cursorline       " Surligne la ligne actuelle
+              set scrolloff=8      " Garde toujours 8 lignes au-dessus/en dessous du curseur
+              set signcolumn=yes   " Garde la marge des erreurs/git fixe
+              set nowrap           " Ne pas couper les lignes automatiquement
 
-				set number           " Numéros de ligne
-				set relativenumber   " Numéros relatifs (crucial pour sauter des lignes)
-				set cursorline       " Surligne la ligne actuelle
-				set scrolloff=8      " Garde toujours 8 lignes au-dessus/en dessous du curseur
-				set signcolumn=yes   " Garde la marge des erreurs/git fixe
-				set nowrap           " Ne pas couper les lignes automatiquement
+              set ignorecase       " Recherche insensible à la casse
+              set smartcase        " Sauf si on utilise une majuscule
+              set incsearch        " Recherche en temps réel
+              set hlsearch         " Surligne les résultats
+              set mouse=a          " Permet d'utiliser la souris
 
-				set ignorecase       " Recherche insensible à la casse
-				set smartcase        " Sauf si on utilise une majuscule
-				set incsearch        " Recherche en temps réel
-				set hlsearch         " Surligne les résultats
-				set mouse=a          " Permet d'utiliser la souris
+              set clipboard=unnamedplus
 
-				" Nécessite 'vim-huge' pour le support du système
-				set clipboard=unnamedplus
+              let mapleader = " "
 
-				let mapleader = " "  " La touche Leader devient la barre d'espace
-				
-				nnoremap <leader>h :nohlsearch<CR>
-				
-				nnoremap <C-h> <C-w>h
-				nnoremap <C-j> <C-w>j
-				nnoremap <C-k> <C-w>k
-				nnoremap <C-l> <C-w>l
+              nnoremap <leader>h :nohlsearch<CR>
 
-				set noswapfile       " Pas de fichiers .swp gênants
-				set undofile         " Historique persistant des modifications
-				set undodir=~/.vim/undo
-				'';
-		};
-	};
+              nnoremap <C-h> <C-w>h
+              nnoremap <C-j> <C-w>j
+              nnoremap <C-k> <C-w>k
+              nnoremap <C-l> <C-w>l
+
+              set noswapfile       " Pas de fichiers .swp gênants
+              set undofile         " Historique persistant des modifications
+              set undodir=~/.vim/undo
+            '';
+          };
+        };
+      };
+    };
+  };
 }
 
