@@ -26,6 +26,11 @@ in
 
 	powerManagement.enable = true;
 
+  zramSwap = {
+    # Compresses the ram used in memory
+    enable = true;
+  };
+
 	time.timeZone = "Europe/Paris";
 
 	i18n.defaultLocale = "en_US.UTF-8";
