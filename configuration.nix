@@ -2,25 +2,25 @@
 
 let
 
-home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
 
 in
 
-{ imports =
-	[ /etc/nixos/hardware-configuration.nix
-		(import "${home-manager}/nixos")
-	];
+  { imports =
+    [ /etc/nixos/hardware-configuration.nix
+    (import "${home-manager}/nixos")
+  ];
 
-	boot.loader.systemd-boot.enable = true;
-	boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-	boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-	powerManagement.enable = true;
+  powerManagement.enable = true;
 
-	time.timeZone = "Europe/Paris";
+  time.timeZone = "Europe/Paris";
 
-	i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
     avahi = {
@@ -45,23 +45,23 @@ in
     };
   };
 
-	networking = {
-	  hostName = "nixos";
-		firewall = {
-			enable = true;
+  networking = {
+    hostName = "nixos";
+    firewall = {
+      enable = true;
       allowPing = false;
-			allowedTCPPorts = [];
-			allowedUDPPorts = [];
-		};
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
+    };
     networkmanager = {
       enable = true;
       wifi = {
         powersave = true;
       };
     };
-	};
+  };
 
-	system.stateVersion = "25.05";
+  system.stateVersion = "25.05";
 
   nixpkgs = {
     config = {
@@ -70,33 +70,49 @@ in
     };
   };
 
-	services = {
-		xserver = {
-			enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us"; # Ou votre disposition habituelle
+        options = "compose:ralt"; # Définit Alt Gr comme touche de composition
+      };
       displayManager = {
         gdm = {
           enable = true;
         };
-        desktopManager = {
-          gnome = {
-            enable = true;
-          };
+      };
+      desktopManager = {
+        gnome = {
+          enable = true;
         };
       };
-			xkb = {
-				layout = "us"; # Ou votre disposition habituelle
-				options = "compose:ralt"; # Définit Alt Gr comme touche de composition
-			};
-		};
-	};
+    };
+  };
 
-	users.users.amin = {
-		isNormalUser = true;
-		description = "Amin NAIRI";
-    extraGroups = [ "video" "wheel" ];
-		shell = pkgs.fish;
-		home = "/home/amin";
-	}; 
+  programs = {
+    fish = {
+      enable = true;
+    };
+
+    git = {
+      enable = true;
+      config = {
+        init = {
+          defaultBranch = "development";
+        };
+        user = {
+          name = "aminnairi";
+          email = "18418459+aminnairi@users.noreply.github.com";
+        };
+      };
+    };
+
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
+  };
 
   environment = {
     variables = {
@@ -110,61 +126,40 @@ in
       home-manager
     ];
     gnome = {
-      excludePackages = with pkgs; [
-        geary
-        gnome-calendar
-        gnome-contacts
-        gnome-clocks
-        snapshot
-        gnome-tour
-        gnome-help
-        gnome-text-editor
-        gnome-weather
-        gnome-maps
-        gnome-music
+      excludePackages = [
+        pkgs.geary
+        pkgs.gnome-calendar
+        pkgs.gnome-contacts
+        pkgs.gnome-clocks
+        pkgs.snapshot
+        pkgs.gnome-tour
+        pkgs.gnome-text-editor
+        pkgs.gnome-weather
+        pkgs.gnome-maps
+        pkgs.gnome-music
       ];
     };
   };
 
-	home-manager.users.amin = { pkgs, ... }: {
-		home = {
-			stateVersion = "25.05";
-		};
+  users.users.amin = {
+    isNormalUser = true;
+    description = "Amin NAIRI";
+    extraGroups = [ "video" "wheel" ];
+    shell = pkgs.fish;
+    home = "/home/amin";
+  }; 
 
-		dconf.settings = {
-			"org/gnome/desktop/input-sources" = {
-				xkb-options = [ "compose:ralt" ];
-			};
-		};
+  home-manager.users.amin = { pkgs, ... }: {
+    home = {
+      stateVersion = "25.05";
+    };
 
-		programs = {
-			git = {
-				enable = true;
-				userName = "aminnairi";
-				userEmail = "18418459+aminnairi@users.noreply.github.com";
-			};
+    dconf.settings = {
+      "org/gnome/desktop/input-sources" = {
+        xkb-options = [ "compose:ralt" ];
+      };
+    };
 
-			vim = {
-				enable = true;
-				defaultEditor = true;
-				settings = {
-					number = true;
-					relativenumber = true;
-					tabstop = 2;
-					shiftwidth = 2;
-					expandtab = true;
-				};
-				extraConfig = ''
-					syntax on
-					set nowrap
-				'';
-				plugins = with pkgs.vimPlugins; [
-					vim-nix
-					vim-commentary
-					vim-surround
-				];
-			};
-		};
-	};
+  };
 }
 
