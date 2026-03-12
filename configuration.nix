@@ -267,6 +267,7 @@ in
               nnoremap <C-j> <C-w>j
               nnoremap <C-k> <C-w>k
               nnoremap <C-l> <C-w>l
+              nnoremap <leader>n :NERDTreeToggle<cr>
 
               set noswapfile       " Pas de fichiers .swp gênants
               set undofile         " Historique persistant des modifications
