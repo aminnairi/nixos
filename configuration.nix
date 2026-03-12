@@ -210,6 +210,7 @@ in
             enable = true;
             shellAbbrs = {
               dkcpdn = "docker compose down --remove-orphans --volumes --timeout 0";
+              nrs = "sudo nixos-rebuild switch";
             };
           };
           vim = {
