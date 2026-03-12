@@ -18,34 +18,71 @@ in
 
 	powerManagement.enable = true;
 
-	networking.hostName = "nixos"; # Define your hostname.
-
-	networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
 	time.timeZone = "Europe/Paris";
 
 	i18n.defaultLocale = "en_US.UTF-8";
 
-	services.printing.enable = true;
+  services = {
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        gutenprint 
+      ];
+    };
+  };
+
+  hardware = {
+    sane = {
+      enable = true;
+      extraBackends = with pkgs; [
+        sane-airscan
+      ];
+    };
+  };
 
 	networking = {
+	  hostName = "nixos";
 		firewall = {
 			enable = true;
+      allowPing = false;
 			allowedTCPPorts = [];
 			allowedUDPPorts = [];
 		};
+    networkmanager = {
+      enable = true;
+      wifi = {
+        powersave = true;
+      };
+    };
 	};
 
 	system.stateVersion = "25.05";
 
-	nixpkgs.config.allowUnfree = true;
-	nixpkgs.config.allowUnfreePredicate = _: true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
 
 	services = {
 		xserver = {
 			enable = true;
-			displayManager.gdm.enable = true;
-			desktopManager.gnome.enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+        };
+        desktopManager = {
+          gnome = {
+            enable = true;
+          };
+        };
+      };
 			xkb = {
 				layout = "us"; # Ou votre disposition habituelle
 				options = "compose:ralt"; # Définit Alt Gr comme touche de composition
@@ -56,15 +93,19 @@ in
 	users.users.amin = {
 		isNormalUser = true;
 		description = "Amin NAIRI";
-		extraGroups = [ "wheel" ];
-		shell = pkgs.bash;
+    extraGroups = [ "video" "wheel" ];
+		shell = pkgs.fish;
 		home = "/home/amin";
 	}; 
 
   environment = {
+    variables = {
+      EDITOR = "vim";
+    };
     systemPackages = with pkgs; [
       git
       vim
+      fish
       google-chrome
       home-manager
     ];
