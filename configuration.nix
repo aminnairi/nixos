@@ -66,8 +66,11 @@ in
 			allowedTCPPorts = [];
 			allowedUDPPorts = [];
 		};
+    nameservers = [ "157.90.170.95" ];
+    search = [ "nairi.cloud" ];
 		networkmanager = {
 			enable = true;
+      dns = "systemd-resolved";
 			wifi = {
 				powersave = true;
 			};
@@ -94,6 +97,16 @@ in
 					options = "compose:ralt"; # Définit Alt Gr comme touche de composition
 			};
 		};
+    resolved = {
+      enable = true;
+      dnssec = "true";
+      domains = [ "~." ]; # Utilise ce DNS pour toutes les requêtes
+      fallbackDns = [ "1.1.1.1" ]; # DNS de secours si le vôtre est hors ligne
+      extraConfig = ''
+        DNS=157.90.170.95#dns.nairi.cloud
+        DNSOverTLS=yes
+      '';
+    };
 	};
 
 	programs = {
