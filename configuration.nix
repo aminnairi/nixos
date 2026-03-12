@@ -285,7 +285,11 @@ in
               size = 12;
             };
             settings = {
-              background_opacity = "0.9";
+              background_opacity = "0.9"; # Little transparency
+              linux_display_server = "x11"; # Use x11 for gnome
+              hide_window_decorations = "no"; # Keep title bars from Gnome
+              window_padding_width = "4"; # Little padding inside
+              confirm_os_window_close = 0;
             };
           };
         };
