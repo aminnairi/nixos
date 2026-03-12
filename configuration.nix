@@ -220,11 +220,18 @@ in
             plugins = with pkgs.vimPlugins; [
               vim-nix
               vim-airline
+              vim-airline-themes
               nerdtree
             ];
             extraConfig = ''
               syntax on
               colorscheme catppuccin
+
+              " Enable airline support for powerline fonts
+              let g:airline_powerline_fonts = 1
+
+              " Ensure encoding is always set to UTF-8
+              set encoding=utf-8
 
               nmap <silent> gd <Plug>(coc-definition)
               nmap <silent> gy <Plug>(coc-type-definition)
