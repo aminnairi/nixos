@@ -137,6 +137,7 @@ in
 		};
 	};
 
+
 	environment = {
 		variables = {
 			EDITOR = "vim";
