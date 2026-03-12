@@ -3,6 +3,7 @@
 let
 
 home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+nixpkgs-src = builtins.fetchTarball https://github.com/nixos/nixpkgs/archive/nixos-25.11.tar.gz;
 
 in
 
@@ -10,6 +11,13 @@ in
 	[ /etc/nixos/hardware-configuration.nix
 		(import "${home-manager}/nixos")
 	];
+
+  nixpkgs.pkgs = import nixpkgs-src {
+    config = {
+      allowUnfree = true;
+			allowUnfreePredicate = _: true;
+    };
+  };
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -62,13 +70,6 @@ in
 	};
 
 	system.stateVersion = "25.05";
-
-	nixpkgs = {
-		config = {
-			allowUnfree = true;
-			allowUnfreePredicate = _: true;
-		};
-	};
 
 	services = {
 		displayManager = {
@@ -189,18 +190,14 @@ in
 				vim-nix
 				vim-airline
 				nerdtree
-				gruvbox
 			];
 			extraConfig = ''
 				syntax on
-				colorscheme gruvbox
 
 				nmap <silent> gd <Plug>(coc-definition)
 				nmap <silent> gy <Plug>(coc-type-definition)
 				nmap <silent> gi <Plug>(coc-implementation)
 				nmap <silent> gr <Plug>(coc-references)
-
-				autocmd BufWritePre *.nix :call CocAction('format')
 
 				set expandtab        " Utilise des espaces au lieu des tabulations
 				set shiftwidth=2     " Indentation automatique de 2 espaces
