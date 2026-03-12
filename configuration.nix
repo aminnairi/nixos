@@ -61,12 +61,29 @@ in
 		home = "/home/amin";
 	}; 
 
-	environment.systemPackages = with pkgs; [
-		git
-		vim
-		google-chrome
-		home-manager
-	];
+  environment = {
+    systemPackages = with pkgs; [
+      git
+      vim
+      google-chrome
+      home-manager
+    ];
+    gnome = {
+      excludePackages = with pkgs; [
+        geary
+        gnome-calendar
+        gnome-contacts
+        gnome-clocks
+        snapshot
+        gnome-tour
+        gnome-help
+        gnome-text-editor
+        gnome-weather
+        gnome-maps
+        gnome-music
+      ];
+    };
+  };
 
 	home-manager.users.amin = { pkgs, ... }: {
 		home = {
