@@ -211,6 +211,8 @@ in
             shellAbbrs = {
               dkcpdn = "docker compose down --remove-orphans --volumes --timeout 0";
               nrs = "sudo nixos-rebuild switch";
+              ncg = "sudo nix-collect-garbage -d";
+              ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
             };
           };
           vim = {
