@@ -150,6 +150,7 @@ in
 			home-manager
 			nil
 			nixfmt-rfc-style
+      kitty
 		];
 		gnome = {
 			excludePackages = with pkgs; [
@@ -249,6 +250,20 @@ in
               set undofile         " Historique persistant des modifications
               set undodir=~/.vim/undo
             '';
+          };
+          kitty = {
+            enable = true;
+            enableGitIntegration = true;
+            shellIntegration = {
+              enableFishIntegration = true;
+            };
+            font = {
+              name = "JetBrainsMono Nerd Font Mono";
+              size = 12;
+            };
+            settings = {
+              background_opacity = "0.9";
+            };
           };
         };
       };
