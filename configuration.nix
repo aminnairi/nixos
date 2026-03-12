@@ -2,7 +2,7 @@
 
 let
 
-home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
 
 in
 
@@ -137,23 +137,25 @@ in
 		};
 		systemPackages = with pkgs; [
 			git
-				vim
-				fish
-				google-chrome
-				home-manager
+			vim
+			fish
+			google-chrome
+			home-manager
+			nil
+			nixfmt-rfc-style
 		];
 		gnome = {
-			excludePackages = [
-				pkgs.geary
-					pkgs.gnome-calendar
-					pkgs.gnome-contacts
-					pkgs.gnome-clocks
-					pkgs.snapshot
-					pkgs.gnome-tour
-					pkgs.gnome-text-editor
-					pkgs.gnome-weather
-					pkgs.gnome-maps
-					pkgs.gnome-music
+			excludePackages = with pkgs; [
+				geary
+				gnome-calendar
+				gnome-contacts
+				gnome-clocks
+				snapshot
+				gnome-tour
+				gnome-text-editor
+				gnome-weather
+				gnome-maps
+				gnome-music
 			];
 		};
 	};
@@ -161,9 +163,81 @@ in
 	users.users.amin = {
 		isNormalUser = true;
 		description = "Amin NAIRI";
-		extraGroups = [ "video" "wheel" ];
+		extraGroups = [ 
+			"video" 
+			"wheel"
+			"networkmanager" 
+		];
 		shell = pkgs.fish;
 		home = "/home/amin";
 	}; 
+
+	home-manager.useGlobalPkgs = true;
+	home-manager.useUserPackages = true;
+
+	home-manager.users.amin = {
+		home = {
+			stateVersion = "25.11";
+			packages = with pkgs; [
+				ripgrep
+				fd
+			];
+		};
+		programs.vim = {
+			enable = true;
+			plugins = with pkgs.vimPlugins; [
+				vim-nix
+				vim-airline
+				nerdtree
+				gruvbox
+			];
+			extraConfig = ''
+				syntax on
+				colorscheme gruvbox
+
+				nmap <silent> gd <Plug>(coc-definition)
+				nmap <silent> gy <Plug>(coc-type-definition)
+				nmap <silent> gi <Plug>(coc-implementation)
+				nmap <silent> gr <Plug>(coc-references)
+
+				autocmd BufWritePre *.nix :call CocAction('format')
+
+				set expandtab        " Utilise des espaces au lieu des tabulations
+				set shiftwidth=2     " Indentation automatique de 2 espaces
+				set softtabstop=2    " 2 espaces pour la touche Tab
+				set tabstop=2        " Une tabulation = 2 espaces
+				set smartindent      " Indentation intelligente selon le langage
+
+				set number           " Numéros de ligne
+				set relativenumber   " Numéros relatifs (crucial pour sauter des lignes)
+				set cursorline       " Surligne la ligne actuelle
+				set scrolloff=8      " Garde toujours 8 lignes au-dessus/en dessous du curseur
+				set signcolumn=yes   " Garde la marge des erreurs/git fixe
+				set nowrap           " Ne pas couper les lignes automatiquement
+
+				set ignorecase       " Recherche insensible à la casse
+				set smartcase        " Sauf si on utilise une majuscule
+				set incsearch        " Recherche en temps réel
+				set hlsearch         " Surligne les résultats
+				set mouse=a          " Permet d'utiliser la souris
+
+				" Nécessite 'vim-huge' pour le support du système
+				set clipboard=unnamedplus
+
+				let mapleader = " "  " La touche Leader devient la barre d'espace
+				
+				nnoremap <leader>h :nohlsearch<CR>
+				
+				nnoremap <C-h> <C-w>h
+				nnoremap <C-j> <C-w>j
+				nnoremap <C-k> <C-w>k
+				nnoremap <C-l> <C-w>l
+
+				set noswapfile       " Pas de fichiers .swp gênants
+				set undofile         " Historique persistant des modifications
+				set undodir=~/.vim/undo
+				'';
+		};
+	};
 }
 
