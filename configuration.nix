@@ -31,7 +31,10 @@ in
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
-  powerManagement.enable = true;
+  powerManagement = {
+    # Enable CPU profiles (powersave, balanced, performance)
+    enable = true;
+  };
 
   zramSwap = {
     # Compresses the ram used in memory
