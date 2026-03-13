@@ -112,6 +112,12 @@ in
     };
     xserver = {
       enable = true;
+      # Reduce screen tearing
+      enableTearFree = true;
+      # Delay after first keystroke before repeating keys
+      autoRepeatDelay = 100;
+      # Delay between keystorkes repeats
+      autoRepeatInterval = 100;
       xkb = {
         # Keyboard layout
         layout = "us";
