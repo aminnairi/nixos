@@ -130,7 +130,9 @@ in
       ];
     };
     resolved = {
+      # Enable DNS over TLS
       enable = true;
+      # Enable DNSSec
       dnssec = "true";
       # Domains that will use this DNS (everything)
       domains = [ "~." ];
@@ -146,24 +148,31 @@ in
 
   programs = {
     fish = {
+      # Enable fish shell
       enable = true;
     };
 
     git = {
+      # Enable git
       enable = true;
       config = {
         init = {
+          # Default branch for when creating a new git repository
           defaultBranch = "development";
         };
         user = {
+          # Global user name
           name = "aminnairi";
+          # Global email
           email = "18418459+aminnairi@users.noreply.github.com";
         };
       };
     };
 
     vim = {
+      # Enable vim
       enable = true;
+      # Make vim the default editor
       defaultEditor = true;
     };
 
