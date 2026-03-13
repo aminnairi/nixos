@@ -102,6 +102,7 @@ in
       defaultSession = "gnome";
       gdm = {
         enable = true;
+        banner = "Welcome, Amin NAIRI";
       };
     };
     desktopManager = {
