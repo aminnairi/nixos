@@ -124,6 +124,10 @@ in
         # Keyboard options (compose key)
         options = "compose:ralt";
       };
+      excludePackages = [
+        # Exclude Xterm from being installed
+        pkgs.xterm
+      ];
     };
     resolved = {
       enable = true;
