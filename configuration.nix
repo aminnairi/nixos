@@ -99,6 +99,7 @@ in
 
   services = {
     displayManager = {
+      defaultSession = "gnome";
       gdm = {
         enable = true;
       };
