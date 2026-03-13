@@ -41,9 +41,17 @@ in
     enable = true;
   };
 
-  time.timeZone = "Europe/Paris";
+  time = {
+    # Timezone for the clock
+    timeZone = "Europe/Paris";
+  };
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    # Locale used by the system
+    defaultLocale = "en_US.UTF-8";
+    # Default character set for the system
+    defaultCharset = "UTF-8";
+  };
 
   services = {
     avahi = {
@@ -103,15 +111,20 @@ in
     xserver = {
       enable = true;
       xkb = {
-        layout = "us"; # Ou votre disposition habituelle
-        options = "compose:ralt"; # Définit Alt Gr comme touche de composition
+        # Keyboard layout
+        layout = "us";
+        # Keyboard options (compose key)
+        options = "compose:ralt";
       };
     };
     resolved = {
       enable = true;
       dnssec = "true";
-      domains = [ "~." ]; # Utilise ce DNS pour toutes les requêtes
-      fallbackDns = [ "1.1.1.1" ]; # DNS de secours si le vôtre est hors ligne
+      # Domains that will use this DNS (everything)
+      domains = [ "~." ];
+      # Fallback DNS
+      fallbackDns = [ "1.1.1.1" ];
+      # Extra configuration (DoT sever)
       extraConfig = ''
         DNS=157.90.170.95#dns.nairi.cloud
         DNSOverTLS=yes
