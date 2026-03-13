@@ -101,12 +101,15 @@ in
     displayManager = {
       defaultSession = "gnome";
       gdm = {
+        # Enable GDM login manager
         enable = true;
-        banner = "Welcome, Amin NAIRI";
+        # Banner displayed above the text input
+        banner = "Welcome back, have a great day";
       };
     };
     desktopManager = {
       gnome = {
+        # Enable Gnome desktop environment
         enable = true;
       };
     };
