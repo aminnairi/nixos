@@ -236,7 +236,6 @@ in
     };
   };
 
-
   environment = {
     variables = {
       EDITOR = "nvim";
@@ -245,7 +244,7 @@ in
       git
       vim
       fish
-      google-chrome
+      chromium
       home-manager
       nil
       nixfmt-rfc-style
