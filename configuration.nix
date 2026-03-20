@@ -172,11 +172,50 @@ in
       };
     };
 
-    vim = {
-      # Enable vim
+    nixvim = {
       enable = true;
-      # Make vim the default editor
-      defaultEditor = true;
+      plugins = with pkgs.vimPlugins; [
+        (nvim-treesitter.withPlugins (p: with p; [
+          typescript
+          html
+          css
+          javascript
+          json
+          tsx
+          jsx
+        ]))
+        nvim-lspconfig
+        nvim-cmp
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+        cmp-cmdline
+        vim-vsnip
+        cmp-vsnip
+        nvim-autopairs
+        nvim-ts-autotag
+        typescript-nvim
+      ];
+      treesitter = {
+        enable = true;
+        settings = {
+          highlight = { enable = true; };
+          indent = { enable = true; };
+        };
+      };
+      lsp = {
+        enable = true;
+        servers = [ "tsserver" "html" "cssls" "jsonls" ];
+      };
+      cmp = {
+        enable = true;
+        mapping = {
+          "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), { 'i': cmp.mapping.select_next_item(), 's': cmp.mapping.select_next_item() })";
+          "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), { 'i': cmp.mapping.select_prev_item(), 's': cmp.mapping.select_prev_item() })";
+          "<CR>" = "cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i': cmp.mapping.confirm({ select = true }), 's': cmp.mapping.confirm({ select = true }) })";
+          "<C-e>" = "cmp.mapping(cmp.mapping.close(), { 'i': cmp.mapping.close(), 's': cmp.mapping.close() })";
+        };
+      };
     };
 
     dconf = {
@@ -200,7 +239,7 @@ in
 
   environment = {
     variables = {
-      EDITOR = "vim";
+      EDITOR = "nvim";
     };
     systemPackages = with pkgs; [
       git
@@ -260,10 +299,6 @@ in
       amin = {
         home = {
           stateVersion = "25.11";
-          packages = with pkgs; [
-            ripgrep
-            fd
-          ];
         };
         programs = {
           fish = {
@@ -274,65 +309,6 @@ in
               ncg = "sudo nix-collect-garbage -d";
               ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
             };
-          };
-          vim = {
-            enable = true;
-            plugins = with pkgs.vimPlugins; [
-              vim-nix
-              vim-airline
-              vim-airline-themes
-              nerdtree
-            ];
-            extraConfig = ''
-                syntax on
-                colorscheme catppuccin
-
-                " Enable airline support for powerline fonts
-                let g:airline_powerline_fonts = 1
-
-                " Ensure encoding is always set to UTF-8
-                set encoding=utf-8
-
-                nmap <silent> gd <Plug>(coc-definition)
-                nmap <silent> gy <Plug>(coc-type-definition)
-                nmap <silent> gi <Plug>(coc-implementation)
-                nmap <silent> gr <Plug>(coc-references)
-
-                set expandtab        " Utilise des espaces au lieu des tabulations
-                set shiftwidth=2     " Indentation automatique de 2 espaces
-                set softtabstop=2    " 2 espaces pour la touche Tab
-                set tabstop=2        " Une tabulation = 2 espaces
-                set smartindent      " Indentation intelligente selon le langage
-
-                set number           " Numéros de ligne
-                set relativenumber   " Numéros relatifs (crucial pour sauter des lignes)
-                set cursorline       " Surligne la ligne actuelle
-                set scrolloff=8      " Garde toujours 8 lignes au-dessus/en dessous du curseur
-                set signcolumn=yes   " Garde la marge des erreurs/git fixe
-                set nowrap           " Ne pas couper les lignes automatiquement
-
-                set ignorecase       " Recherche insensible à la casse
-                set smartcase        " Sauf si on utilise une majuscule
-                set incsearch        " Recherche en temps réel
-                set hlsearch         " Surligne les résultats
-                set mouse=a          " Permet d'utiliser la souris
-
-                set clipboard=unnamedplus
-
-                let mapleader = " "
-
-                nnoremap <leader>h :nohlsearch<CR>
-
-                nnoremap <C-h> <C-w>h
-                nnoremap <C-j> <C-w>j
-                nnoremap <C-k> <C-w>k
-                nnoremap <C-l> <C-w>l
-                nnoremap <leader>n :NERDTreeToggle<cr>
-
-                set noswapfile       " Pas de fichiers .swp gênants
-                set undofile         " Historique persistant des modifications
-                set undodir=~/.vim/undo
-            '';
           };
           kitty = {
             enable = true;
