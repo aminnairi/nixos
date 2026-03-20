@@ -99,39 +99,42 @@ in
 
   services = {
     displayManager = {
-      defaultSession = "gnome";
+      defaultSession = "hyperland";
       gdm = {
-        # Enable GDM login manager
-        enable = true;
-        # Banner displayed above the text input
-        banner = "Welcome back, have a great day";
+        enable = false;
       };
     };
     desktopManager = {
       gnome = {
-        # Enable Gnome desktop environment
-        enable = true;
+        enable = false;
       };
     };
     xserver = {
-      enable = true;
-      # Reduce screen tearing
-      enableTearFree = true;
-      # Delay after first keystroke before repeating keys
-      autoRepeatDelay = 100;
-      # Delay between keystorkes repeats
-      autoRepeatInterval = 100;
-      xkb = {
-        # Keyboard layout
-        layout = "us";
-        # Keyboard options (compose key)
-        options = "compose:ralt";
-      };
-      excludePackages = [
-        # Exclude Xterm from being installed
-        pkgs.xterm
-      ];
+      enable = false;
     };
+    hyperland = {
+      enable = true;
+      xwayland = {
+        enable = true;
+      };
+      settings = {
+        # Keyboard layout
+        "input:kb:0" = {
+          xkb_layout = "us";
+          xkb_options = "compose:ralt";
+        };
+        # Monitor configuration keybindings
+        "keybind" = {
+          # Monitor management shortcuts
+          "SUPER+M" = "exec bash -c 'monitor-mirror'";
+          "SUPER+E" = "exec bash -c 'monitor-extend'";
+          "SUPER+S" = "exec bash -c 'monitor-single'";
+          "SUPER+W" = "exec bash -c 'monitor-swap'";
+          "SUPER+R" = "exec bash -c 'monitor-rotate'";
+        };
+      };
+    };
+  };
     resolved = {
       # Enable DNS over TLS
       enable = true;
@@ -218,22 +221,6 @@ in
       };
     };
 
-    dconf = {
-      enable = true;
-      profiles = {
-        user = {
-          databases = [
-            {
-              settings = {
-                "org/gnome/desktop/input-sources" = {
-                  xkb-options = [ "compose:ralt" ];	
-                };
-              };
-            }
-          ];
-        };
-      };
-    };
   };
 
   environment = {
@@ -249,21 +236,8 @@ in
       nil
       nixfmt-rfc-style
       kitty
+          wlr-randr
     ];
-    gnome = {
-      excludePackages = with pkgs; [
-        geary
-        gnome-calendar
-        gnome-contacts
-        gnome-clocks
-        snapshot
-        gnome-tour
-        gnome-text-editor
-        gnome-weather
-        gnome-maps
-        gnome-music
-      ];
-    };
   };
 
   users.users.amin = {
@@ -307,6 +281,12 @@ in
               nrs = "sudo nixos-rebuild switch";
               ncg = "sudo nix-collect-garbage -d";
               ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
+              # Monitor management shortcuts
+              monitor-mirror = "wlr-randr --output $(wlr-randr | grep ' connected' | head -n1 | awk '{print $1}') --mode 1920x1080 --pos 0,0 --output $(wlr-randr | grep ' connected' | tail -n1 | awk '{print $1}') --mode 1920x1080 --pos 1920,0 --same-as $(wlr-randr | grep ' connected' | head -n1 | awk '{print $1}')";
+              monitor-extend = "wlr-randr --output $(wlr-randr | grep ' connected' | head -n1 | awk '{print $1}') --mode 1920x1080 --pos 0,0 --output $(wlr-randr | grep ' connected' | tail -n1 | awk '{print $1}') --mode 1920x1080 --pos 1920,0";
+              monitor-single = "wlr-randr --output $(wlr-randr | grep ' connected' | head -n1 | awk '{print $1}') --mode 1920x1080 --pos 0,0 --output $(wlr-randr | grep ' connected' | tail -n1 | awk '{print $1}') --off";
+              monitor-swap = "wlr-randr --output $(wlr-randr | grep ' connected' | head -n1 | awk '{print $1}') --mode 1920x1080 --pos 1920,0 --output $(wlr-randr | grep ' connected' | tail -n1 | awk '{print $1}') --mode 1920x1080 --pos 0,0";
+              monitor-rotate = "wlr-randr --output $(wlr-randr | grep ' connected' | head -n1 | awk '{print $1}') --mode 1920x1080 --pos 0,0 --output $(wlr-randr | grep ' connected' | tail -n1 | awk '{print $1}') --mode 1080x1920 --pos 1920,0";
             };
           };
           kitty = {
