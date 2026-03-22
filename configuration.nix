@@ -3,6 +3,11 @@
 let
   nixpkgs-src = builtins.fetchTarball https://github.com/nixos/nixpkgs/archive/nixos-25.11.tar.gz;
   home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+  lazyvim = pkgs.fetchFromGitHub {
+    owner = "LazyVim";
+    repo = "Starter";
+    rev = "v2.10.0";
+  };
 in
 
 {
@@ -30,6 +35,7 @@ in
 
 # Time zone
   time.timeZone = "Europe/Paris";
+  time.hardwareClockInLocalTime = true;
 
 # Locale
   i18n.defaultLocale = "en_US.UTF-8";
@@ -66,8 +72,15 @@ in
     gnome-music
   ];
 
+# Docker
+  virtualization.docker.enable = true;
+  virtualization.docker.enableOnBoot = true;
+  virtualization.docker.rootless.enable = true;
+  virtualization.docker.autoPrune.enable = true;
+
 # Users
   users.users.amin.isNormalUser = true;
+  users.users.amin.name = "Amin NAIRI";
   users.users.amin.description = "Amin NAIRI";
   users.users.amin.extraGroups = [ "video" "wheel" "networkmanager" ];
   users.users.amin.shell = pkgs.fish;
@@ -93,6 +106,18 @@ in
   home-manager.users.amin.programs.fish.shellAbbrs.nrs = "sudo nixos-rebuild switch";
   home-manager.users.amin.programs.fish.shellAbbrs.ncg = "sudo nix-collect-garbage -d";
   home-manager.users.amin.programs.fish.shellAbbrs.ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
+
+# Lazyvim
+  home-manager.users.amin.xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
+    owner = "LazyVim";
+    repo = "Starter";
+  };
+
+  xdg.configFile."nvim/lua/config/plugins/avante.lua".text = ''
+    return {
+      import = "lazyvim.plugins.extras.ai.avante"
+    }
+  '';
 
 # Kitty
   home-manager.users.amin.programs.kitty.enable = true;
