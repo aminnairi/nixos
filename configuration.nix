@@ -46,6 +46,9 @@ in
     settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   }];
 
+# Services
+  services.libinput.enable = true;
+
 # Fish (system-wide)
   programs.fish.enable = true;
 
