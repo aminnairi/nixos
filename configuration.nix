@@ -73,10 +73,10 @@ in
   ];
 
 # Docker
-  virtualization.docker.enable = true;
-  virtualization.docker.enableOnBoot = true;
-  virtualization.docker.rootless.enable = true;
-  virtualization.docker.autoPrune.enable = true;
+  virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = true;
+  virtualisation.docker.rootless.enable = true;
+  virtualisation.docker.autoPrune.enable = true;
 
 # Users
   users.users.amin.isNormalUser = true;
