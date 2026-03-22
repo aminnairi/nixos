@@ -128,14 +128,8 @@ in
     sha256 = "sha256-QrpnlDD4r1X4C8PqBhQ+S3ar5C+qDrU1Jm/lPqyMIFM=";
   };
 
-  home-manager.users.amin.xdg.configFile."test".text = "Hello, world!";
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".text = "return { import = 'lazyvim.plugins.extras.ai.avante' }";
 
-  # home-manager.users.amin.home.file."nvim/lua/config/plugins/avante.lua".text = ''
-  #   return {
-  #     import = "lazyvim.plugins.extras.ai.avante"
-  #   }
-  # '';
-  #
 # Kitty
   home-manager.users.amin.programs.kitty.enable = true;
   home-manager.users.amin.programs.kitty.enableGitIntegration = true;
