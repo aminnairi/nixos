@@ -118,21 +118,21 @@ in
 
 # VSCode
   home-manager.users.amin.programs.vscode.enable = true;
-  home-manager.users.amin.programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [
-    bbenoist.nix
-    ms-vscode.vscode-typescript-next
-    dbaeumer.vscode-eslint
-    esbenp.prettier-vscode
-    bradlc.vscode-tailwindcss
-    eamodio.gitlens
-    mhutchie.git-graph
-    jnoortheen.nix-ide
-    editorconfig.editorconfig
-    streetsidesoftware.code-spell-checker
-    usernamehw.errorlens
-    christian-kohler.path-intellisense
-    mikestead.dotenv
-    vscodevim.vim
+  home-manager.users.amin.programs.vscode.profiles.default.extensions = [
+    pkgs.vscode-extensions.bbenoist.nix
+    pkgs.vscode-extensions.ms-vscode.vscode-typescript-next
+    pkgs.vscode-extensions.dbaeumer.vscode-eslint
+    pkgs.vscode-extensions.esbenp.prettier-vscode
+    pkgs.vscode-extensions.bradlc.vscode-tailwindcss
+    pkgs.vscode-extensions.eamodio.gitlens
+    pkgs.vscode-extensions.mhutchie.git-graph
+    pkgs.vscode-extensions.jnoortheen.nix-ide
+    pkgs.vscode-extensions.editorconfig.editorconfig
+    pkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+    pkgs.vscode-extensions.usernamehw.errorlens
+    pkgs.vscode-extensions.christian-kohler.path-intellisense
+    pkgs.vscode-extensions.mikestead.dotenv
+    pkgs.vscode-extensions.vscodevim.vim
   ];
 
   home-manager.users.amin.programs.vscode.userSettings = {
