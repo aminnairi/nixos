@@ -48,6 +48,20 @@ in
     }
   ];
 
+# Environment (system-wide)
+  environment.gnome.excludePackages = with pkgs; [
+    geary
+    gnome-calendar
+    gnome-contacts
+    gnome-clocks
+    snapshot
+    gnome-tour
+    gnome-text-editor
+    gnome-weather
+    gnome-maps
+    gnome-music
+  ];
+
 # Users
   users.users.amin.isNormalUser = true;
   users.users.amin.description = "Amin NAIRI";
@@ -71,6 +85,22 @@ in
 # Fish
   home-manager.users.amin.programs.fish.enable = true;
   home-manager.users.amin.programs.fish.completions.dkcpu = "docker compose up --detach --build";
+  home-manager.users.amin.programs.fish.shellAbbrs.dkcpdn = "docker compose down --remove-orphans --volumes --timeout 0";
+  home-manager.users.amin.programs.fish.shellAbbrs.nrs = "sudo nixos-rebuild switch";
+  home-manager.users.amin.programs.fish.shellAbbrs.ncg = "sudo nix-collect-garbage -d";
+  home-manager.users.amin.programs.fish.shellAbbrs.ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
+
+# Kitty
+  home-manager.users.amin.programs.kitty.enable = true;
+  home-manager.users.amin.programs.kitty.enableGitIntegration = true;
+  home-manager.users.amin.programs.kitty.shellIntegration.enableFishIntegration = true;
+  home-manager.users.amin.programs.kitty.font.name = "JetBrainsMono Nerd Font Mono";
+  home-manager.users.amin.programs.kitty.font.size = 12;
+  home-manager.users.amin.programs.kitty.settings.background_opacity = "0.9";
+  home-manager.users.amin.programs.kitty.settings.linux_display_server = "x11";
+  home-manager.users.amin.programs.kitty.settings.hide_window_decorations = "no";
+  home-manager.users.amin.programs.kitty.settings.window_padding_width = "4";
+  home-manager.users.amin.programs.kitty.settings.confirm_os_window_close = 0;
   
 # Home manager packages
   home-manager.users.amin.home.packages = with pkgs; [
