@@ -40,6 +40,14 @@ in
 # Fish (system-wide)
   programs.fish.enable = true;
 
+# Gnome (system-wide)
+  programs.dconf.enable = true;
+  programs.dconf.profiles.user.databases = [
+    {
+      settings."org/gnome/desktop/input-sources".xkb-options = [ "compose:ralt" ];	
+    }
+  ];
+
 # Users
   users.users.amin.isNormalUser = true;
   users.users.amin.description = "Amin NAIRI";
