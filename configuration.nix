@@ -3,11 +3,6 @@
 let
   nixpkgs-src = builtins.fetchTarball https://github.com/nixos/nixpkgs/archive/nixos-25.11.tar.gz;
   home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
-  lazyvim = pkgs.fetchFromGitHub {
-    owner = "LazyVim";
-    repo = "Starter";
-    rev = "v2.10.0";
-  };
 in
 
 {
