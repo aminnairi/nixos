@@ -122,14 +122,8 @@ in
   home-manager.users.amin.programs.fish.shellAbbrs.ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
 
 # Lazyvim
-  home-manager.users.amin.xdg.configFile."nvim/init.lua".recursive = true;
-  home-manager.users.amin.xdg.configFile."nvim/init.lua".source = ./lazyvim/init.lua;
-
-  home-manager.users.amin.xdg.configFile."nvim/lua/config/lazy.lua".recursive = true;
-  home-manager.users.amin.xdg.configFile."nvim/lua/config/lazy.lua".source = ./lazyvim/lua/config/lazy.lua;
-
-  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".recursive = true;
-  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".source = ./lazyvim/lua/plugins/avante.lua;
+  home-manager.users.amin.xdg.configFile."nvim".recursive = true;
+  home-manager.users.amin.xdg.configFile."nvim".source = ./nvim;
 
 # Lazygit
   home-manager.users.amin.programs.lazygit.enable = true;
