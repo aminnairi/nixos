@@ -1,12 +1,27 @@
 # nixos
 
-## Symbolic link
+## 1. Clone the repository
 
 ```bash
-ln -sf $PWD/configuration.nix /etc/nixos/configuration.nix
+cd ~
+nix-shell -p git
+git clone https://github.com/aminnairi/nixos ~/git/github.com/aminnairi/nixos
 ```
 
-## Build
+## 2. Link the configuration
+
+```bash
+sudo ln -sf $PWD/configuration.nix /etc/nixos/configuration.nix
+```
+
+> [!ERROR]
+> If you have installed the system using a crypted partition (LUKS), you should move the following line from the `configuration.nix` into the `hardware-configuration.nix` as it is not done by default
+>
+> ```nix
+> boot.initrd.luks.devices."...".device = "/dev/mapper/by-uuid/...";
+> ```
+
+## Install the system
 
 ```bash
 sudo nixos-rebuild switch
