@@ -41,18 +41,18 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings.LANG = "en_US.UTF-8";
   i18n.extraLocaleSettings.LANGUAGE = "en_US.UTF-8";
-  i18n.extraLocaleSettings.CL_CTYPE = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_NUMERIC = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_COLLATE = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_TIME = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_MESSAGES = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_MONETARY = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_ADDRESS = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_IDENTIFICATION = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.MEASUREMENT = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_PAPER = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_TELEPHONE = "fr_FR.UTF_8";
-  i18n.extraLocaleSettings.LC_NAME = "fr_FR.UTF_8";
+  i18n.extraLocaleSettings.CL_CTYPE = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_NUMERIC = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_COLLATE = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_TIME = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_MESSAGES = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_MONETARY = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_ADDRESS = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_IDENTIFICATION = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.MEASUREMENT = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_PAPER = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_TELEPHONE = "fr_FR.UTF-8";
+  i18n.extraLocaleSettings.LC_NAME = "fr_FR.UTF-8";
 
 # Networking
   networking.hostName = "nixos";
