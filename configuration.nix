@@ -118,6 +118,12 @@ in
 
 # VSCode
   home-manager.users.amin.programs.vscode.enable = true;
+  home-manager.users.amin.programs.vscode.profiles.default.extensions = [
+    pkgs.vscode-extensions.bbenoist.nix
+  ];
+
+# Git
+  home-manager.users.amin.programs.git.enable = true;
 
 # Lazygit
   home-manager.users.amin.programs.lazygit.enable = true;
