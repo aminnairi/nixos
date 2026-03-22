@@ -131,6 +131,10 @@ in
   home-manager.users.amin.xdg.configFile."nvim".recursive = true;
   home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".text = "return { import = 'lazyvim.plugins.extras.ai.avante' }";
 
+# Lazygit
+  home-manager.users.amin.programs.lazygit.enable = true;
+  home-manager.users.amin.programs.lazygit.enableFishIntegration = true;
+
 # Kitty
   home-manager.users.amin.programs.kitty.enable = true;
   home-manager.users.amin.programs.kitty.enableGitIntegration = true;
