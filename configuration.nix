@@ -3,11 +3,13 @@
 let
   nixpkgs-src = builtins.fetchTarball https://github.com/nixos/nixpkgs/archive/nixos-25.11.tar.gz;
   home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+  nixvim = builtins.fetchTarball https://github.com/nix-community/nixvim/archive/nixos-25.11.tar.gz;
 in
 
 {
   imports = [
     (import "${home-manager}/nixos")
+    nixvim.homeModules.nixvim
   ];
 
   nixpkgs.pkgs = import nixpkgs-src {
@@ -116,9 +118,8 @@ in
   home-manager.users.amin.programs.fish.shellAbbrs.ncg = "sudo nix-collect-garbage -d";
   home-manager.users.amin.programs.fish.shellAbbrs.ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
 
-# Lazyvim
-  home-manager.users.amin.xdg.configFile."nvim".recursive = true;
-  home-manager.users.amin.xdg.configFile."nvim".source = ./nvim;
+# Nixvim
+  home-manager.users.amin.programs.nixvim.plugins.lightline.enable = true;
 
 # Lazygit
   home-manager.users.amin.programs.lazygit.enable = true;
@@ -138,6 +139,7 @@ in
   
 # Home manager packages
   home-manager.users.amin.home.packages = with pkgs; [
+    vim
     chromium
     gcc
   ];
