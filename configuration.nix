@@ -39,7 +39,6 @@ in
 
 # Users
   users.users.amin.isNormalUser = true;
-  users.users.amin.isNormalUser = true;
   users.users.amin.description = "Amin NAIRI";
   users.users.amin.extraGroups = [ "video" "wheel" "networkmanager" ];
   users.users.amin.shell = pkgs.fish;
