@@ -9,7 +9,7 @@ in
 {
   imports = [
     (import "${home-manager}/nixos")
-    (import "${nixvim}/wrappers/hm")
+    (import "${nixvim}/wrappers/hm.nix")
   ];
 
   nixpkgs.pkgs = import nixpkgs-src {
