@@ -2,17 +2,26 @@
 
 My own NixOS configuration
 
+## Requirements
+
+Create a bootable USB using the NixOS grahical installation version and install the system with encryption.
+
 ## Installation
 
 ### 1. Clone the repository
 
 ```bash
 cd ~
-nix-shell -p git
+nix-shell -p git vim
 git clone https://github.com/aminnairi/nixos ~/git/github.com/aminnairi/nixos
+exit
 ```
 
 ### 2. Setup the configuration
+
+```bash
+sudo vim /etc/nixos/configuration.nix
+```
 
 ```nix
 { config, pkgs, ... }:
