@@ -117,7 +117,7 @@ in
   home-manager.users.amin.programs.fish.shellAbbrs.ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
 
 # VSCode
-  home-manager-users.amin.programs.vscode.enable = true;
+  home-manager.users.amin.programs.vscode.enable = true;
 
 # Lazygit
   home-manager.users.amin.programs.lazygit.enable = true;
