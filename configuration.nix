@@ -120,7 +120,6 @@ in
   home-manager.users.amin.programs.vscode.enable = true;
   home-manager.users.amin.programs.vscode.profiles.default.extensions = [
     pkgs.vscode-extensions.bbenoist.nix
-    pkgs.vscode-extensions.ms-vscode.vscode-typescript-next
     pkgs.vscode-extensions.dbaeumer.vscode-eslint
     pkgs.vscode-extensions.esbenp.prettier-vscode
     pkgs.vscode-extensions.bradlc.vscode-tailwindcss
