@@ -93,6 +93,7 @@ in
 # Home Manager
   home-manager.useGlobalPkgs = true;
   home-manager.users.amin.home.stateVersion = "25.11";
+  home-manager.users.amin.xdg.configHome = "/home/amin";
 
 # Neovim
   home-manager.users.amin.programs.neovim.enable = true;
