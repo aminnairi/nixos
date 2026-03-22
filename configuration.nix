@@ -158,5 +158,6 @@ in
 # Home manager packages
   home-manager.users.amin.home.packages = with pkgs; [
     chromium
+    gcc
   ];
 }
