@@ -118,9 +118,66 @@ in
 
 # VSCode
   home-manager.users.amin.programs.vscode.enable = true;
-  home-manager.users.amin.programs.vscode.profiles.default.extensions = [
-    pkgs.vscode-extensions.bbenoist.nix
+  home-manager.users.amin.programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [
+    bbenoist.nix
+    ms-vscode.vscode-typescript-next
+    dbaeumer.vscode-eslint
+    esbenp.prettier-vscode
+    bradlc.vscode-tailwindcss
+    eamodio.gitlens
+    mhutchie.git-graph
+    jnoortheen.nix-ide
+    editorconfig.editorconfig
+    streetsidesoftware.code-spell-checker
+    usernamehw.errorlens
+    christian-kohler.path-intellisense
+    mikestead.dotenv
   ];
+
+  home-manager.users.amin.programs.vscode.userSettings = {
+    "editor.formatOnSave" = true;
+    "editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "editor.tabSize" = 2;
+    "editor.insertSpaces" = true;
+    "editor.detectIndentation" = false;
+    "editor.wordWrap" = "on";
+    "editor.minimap.enabled" = false;
+    "editor.renderWhitespace" = "boundary";
+    "editor.cursorBlinking" = "smooth";
+    "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
+    "editor.fontLigatures" = true;
+    "editor.fontSize" = 14;
+    "typescript.preferences.importModuleSpecifier" = "relative";
+    "typescript.updateImportsOnFileMove.enabled" = "always";
+    "typescript.inlayHints.parameterNames.enabled" = "all";
+    "typescript.inlayHints.returnTypes.enabled" = true;
+    "eslint.validate" = [ "javascript" "javascriptreact" "typescript" "typescriptreact" ];
+    "editor.codeActionsOnSave" = {
+      "source.fixAll.eslint" = "explicit";
+    };
+    "[typescript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[typescriptreact]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[javascriptreact]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[json]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[css]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[html]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "git.autofetch" = true;
+    "git.confirmSync" = false;
+    "gitlens.codeLens.enabled" = false;
+    "explorer.confirmDelete" = false;
+    "explorer.confirmDragAndDrop" = false;
+    "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
+    "terminal.integrated.fontSize" = 13;
+    "nix.enableLanguageServer" = true;
+    "nix.serverPath" = "nixd";
+    "workbench.colorTheme" = "Default Dark Modern";
+    "workbench.startupEditor" = "none";
+    "breadcrumbs.enabled" = true;
+    "files.trimTrailingWhitespace" = true;
+    "files.insertFinalNewline" = true;
+  };
+
 
 # Git
   home-manager.users.amin.programs.git.enable = true;
