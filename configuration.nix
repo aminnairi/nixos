@@ -134,7 +134,7 @@ in
     pkgs.vscode-extensions.vscodevim.vim
   ];
 
-  home-manager.users.amin.programs.vscode.userSettings = {
+  home-manager.users.amin.programs.vscode.profiles.default.userSettings = {
     "editor.formatOnSave" = true;
     "editor.defaultFormatter" = "esbenp.prettier-vscode";
     "editor.tabSize" = 2;
