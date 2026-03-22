@@ -48,7 +48,7 @@ in
   users.users.amin.home = "/home/amin";
 
 # Fonts
-  fonts.packages = with pkgs; [ nerd-fonts-jetbrains-mono ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
   fonts.fontconfig.enable = true;
   fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
 
