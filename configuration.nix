@@ -128,6 +128,12 @@ in
     sha256 = "sha256-QrpnlDD4r1X4C8PqBhQ+S3ar5C+qDrU1Jm/lPqyMIFM=";
   };
 
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/lazy.lua".text = ''
+    return {
+      lockfile = vim.fn.stdpath("cache") .. "/lazy-lock.json",
+    }
+  '';
+
   home-manager.users.amin.xdg.configFile."nvim".recursive = true;
   home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".text = "return { import = 'lazyvim.plugins.extras.ai.avante' }";
 
