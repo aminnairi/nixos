@@ -36,16 +36,17 @@ in
 # Networking
   networking.hostName = "nixos";
 
+# Gnome
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  programs.dconf.enable = true;
+  programs.dconf.profiles.user.databases = [{
+    settings."org/gnome/desktop/input-sources".xkb-options = [ "compose:ralt" ];	
+    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  }];
+
 # Fish (system-wide)
   programs.fish.enable = true;
-
-# Gnome (system-wide)
-  programs.dconf.enable = true;
-  programs.dconf.profiles.user.databases = [
-    {
-      settings."org/gnome/desktop/input-sources".xkb-options = [ "compose:ralt" ];	
-    }
-  ];
 
 # Environment (system-wide)
   environment.gnome.excludePackages = with pkgs; [
