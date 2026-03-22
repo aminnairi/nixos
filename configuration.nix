@@ -37,6 +37,9 @@ in
 # Networking
   networking.hostName = "nixos";
 
+# Fish (system-wide)
+  programs.fish.enable = true;
+
 # Users
   users.users.amin.isNormalUser = true;
   users.users.amin.description = "Amin NAIRI";
