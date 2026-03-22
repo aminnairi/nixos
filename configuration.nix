@@ -132,6 +132,7 @@ in
     usernamehw.errorlens
     christian-kohler.path-intellisense
     mikestead.dotenv
+    vscodevim.vim
   ];
 
   home-manager.users.amin.programs.vscode.userSettings = {
