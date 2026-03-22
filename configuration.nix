@@ -40,11 +40,10 @@ in
   programs.git.config.user.name = "aminnairi";
   programs.git.config.user.email = "18418459+aminnairi@users.noreply.github.com";
 
-  programs.nixvim.enable = true;
-
   environment.variables.EDITOR = "nvim";
 
   environment.systemPackages = with pkgs; [
+    neovim
     chromium
   ];
 
