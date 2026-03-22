@@ -203,5 +203,7 @@ in
     vim
     chromium
     gcc
+    nixd
+    nodejs
   ];
 }
