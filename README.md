@@ -14,7 +14,7 @@ git clone https://github.com/aminnairi/nixos ~/git/github.com/aminnairi/nixos
 sudo ln -sf $PWD/configuration.nix /etc/nixos/configuration.nix
 ```
 
-> [!ERROR]
+> [!CAUTION]
 > If you have installed the system using a crypted partition (LUKS), you should move the following line from the `configuration.nix` into the `hardware-configuration.nix` as it is not done by default
 >
 > ```nix
