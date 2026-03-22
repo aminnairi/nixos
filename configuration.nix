@@ -135,7 +135,9 @@ in
   '';
 
   home-manager.users.amin.xdg.configFile."nvim".recursive = true;
-  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".text = "return { import = 'lazyvim.plugins.extras.ai.avante' }";
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".text = ''
+    return { import = 'lazyvim.plugins.extras.ai.avante' }
+  '';
 
 # Lazygit
   home-manager.users.amin.programs.lazygit.enable = true;
