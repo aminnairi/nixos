@@ -31,7 +31,6 @@ in
   services.displayManager.defaultSession = "hyperland";
 
   services.hyperland.enable = true;
-  services.hyperland.xwayland.enable = true;
 
   programs.fish.enable = true;
 
