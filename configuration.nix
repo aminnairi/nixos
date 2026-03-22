@@ -121,25 +121,14 @@ in
   home-manager.users.amin.programs.fish.shellAbbrs.ndg = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5";
 
 # Lazyvim
-  home-manager.users.amin.xdg.configFile."nvim" = {
-    source = pkgs.fetchFromGitHub {
-      owner = "LazyVim";
-      repo = "Starter";
-      rev = "803bc181d7c0d6d5eeba9274d9be49b287294d99";
-      sha256 = "sha256-QrpnlDD4r1X4C8PqBhQ+S3ar5C+qDrU1Jm/lPqyMIFM=";
-    };
-    recursive = true;
-  };
+  home-manager.users.amin.xdg.configFile."nvim/init.lua".recursive = true;
+  home-manager.users.amin.xdg.configFile."nvim/init.lua".source = ./lazyvim/init.lua;
 
-  home-manager.users.amin.xdg.configFile."nvim/lua/config/lazy.lua".text = ''
-    return {
-      lockfile = vim.fn.stdpath("cache") .. "/lazy-lock.json",
-    }
-  '';
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/lazy.lua".recursive = true;
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/lazy.lua".source = ./lazyvim/lua/config/lazy.lua;
 
-  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".text = ''
-    return { import = 'lazyvim.plugins.extras.ai.avante' }
-  '';
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".recursive = true;
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".source = ./lazyvim/lua/plugins/avante.lua;
 
 # Lazygit
   home-manager.users.amin.programs.lazygit.enable = true;
