@@ -6,8 +6,7 @@ home-manager = builtins.fetchTarball https://github.com/nix-community/home-manag
 in
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
-      (import "${home-manager}/nixos")
+    (import "${home-manager}/nixos")
   ];
 
   nixpkgs.pkgs = import nixpkgs-src {
