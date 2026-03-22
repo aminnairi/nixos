@@ -33,9 +33,8 @@ in
 
   services.hyperland.enable = true;
   services.hyperland.xwayland.enable = true;
-  services.hyperland.settings
 
-    programs.fish.enable = true;
+  programs.fish.enable = true;
 
   programs.git.enable = true;
   programs.git.config.init.defaultBranch = "development";
