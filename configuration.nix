@@ -113,7 +113,7 @@ in
     repo = "Starter";
   };
 
-  xdg.configFile."nvim/lua/config/plugins/avante.lua".text = ''
+  home-manager.users.amin.xdg.configFile."nvim/lua/config/plugins/avante.lua".text = ''
     return {
       import = "lazyvim.plugins.extras.ai.avante"
     }
